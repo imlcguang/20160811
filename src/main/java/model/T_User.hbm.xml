@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-8-10 16:21:49 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="model.T_User" table="T_USER">
+        <id name="UserID" type="java.lang.Integer">
+            <column name="USERID" />
+            <generator class="assigned" />
+        </id>
+        <property name="LoginName" type="java.lang.String">
+            <column name="LOGINNAME" />
+        </property>
+        <property name="Password" type="java.lang.String">
+            <column name="PASSWORD" />
+        </property>
+        <property name="UserName" type="java.lang.String">
+            <column name="USERNAME" />
+        </property>
+        <property name="UserSex" type="java.lang.String">
+            <column name="USERSEX" />
+        </property>
+        <property name="FunctionPopedom" type="java.lang.String">
+            <column name="FUNCTIONPOPEDOM" />
+        </property>
+    </class>
+</hibernate-mapping>

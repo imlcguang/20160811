@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-8-10 16:21:49 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="model.T_BorrowRecord" table="T_BORROWRECORD">
+        <id name="BorrowNo" type="java.lang.Integer">
+            <column name="BORROWNO" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="CustomerID" class="model.T_Customer" fetch="join">
+            <column name="CUSTOMERID" />
+        </many-to-one>
+        <property name="SendDatetime" type="java.util.Date">
+            <column name="SENDDATETIME" />
+        </property>
+        <many-to-one name="BorrowPermitPerson" class="model.T_User" fetch="join">
+            <column name="BORROWPERMITPERSON" />
+        </many-to-one>
+        <many-to-one name="BorrowOperator" class="model.T_User" fetch="join">
+            <column name="BORROWOPERATOR" />
+        </many-to-one>
+        <property name="BorrowOperatDatetime" type="java.util.Date">
+            <column name="BORROWOPERATDATETIME" />
+        </property>
+        <property name="PlanReturnDatetime" type="java.util.Date">
+            <column name="PLANRETURNDATETIME" />
+        </property>
+        <many-to-one name="ModelID" class="model.T_Model" fetch="join">
+            <column name="MODELID" />
+        </many-to-one>
+        <property name="BorrowNumber" type="java.lang.Integer">
+            <column name="BORROWNUMBER" />
+        </property>
+        <property name="BorrowCheckNo" type="java.lang.Integer">
+            <column name="BORROWCHECKNO" />
+        </property>
+        <property name="ReturnDatetime" type="java.util.Date">
+            <column name="RETURNDATETIME" />
+        </property>
+        <many-to-one name="ReturnOperator" class="model.T_User" fetch="join">
+            <column name="RETURNOPERATOR" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

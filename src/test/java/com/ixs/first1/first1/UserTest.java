@@ -11,8 +11,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.T_Customer;
+import model.T_User;
 
-public class CustomerTest {
+public class UserTest {
 	private SessionFactory sessionFactory;// 声明私有会话工厂对象类
 	private Session session;// 声明私有会话对象类
 	private Transaction transaction;// 声明私有事务对象类
@@ -50,9 +51,9 @@ public class CustomerTest {
 	@Test
 	public void testSaveCustomers() {
 
-		T_Customer c=new T_Customer(441, "ruby", "tom", "123456321",
-				"fzu", "ruby@qq.com", "0");
-		session.save(c);
+		T_User u=new T_User(02, "01", "lily", "lily", "1",
+				"1111111");
+		session.save(u);
 		System.out.println("test");
 		
 	}
