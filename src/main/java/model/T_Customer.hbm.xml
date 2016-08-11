@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-8-10 16:21:49 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="model.T_Customer" table="T_CUSTOMER">
+        <id name="CustomerID" type="java.lang.Integer">
+            <column name="CUSTOMERID" />
+            <generator class="assigned" />
+        </id>
+        <property name="CustomerName" type="java.lang.String">
+            <column name="CUSTOMERNAME" />
+        </property>
+        <property name="RelationName" type="java.lang.String">
+            <column name="RELATIONNAME" />
+        </property>
+        <property name="RelationPhone" type="java.lang.String">
+            <column name="RELATIONPHONE" />
+        </property>
+        <property name="Address" type="java.lang.String">
+            <column name="ADDRESS" />
+        </property>
+        <property name="Email" type="java.lang.String">
+            <column name="EMAIL" />
+        </property>
+        <property name="Remark" type="java.lang.String">
+            <column name="REMARK" />
+        </property>
+    </class>
+</hibernate-mapping>
