@@ -6,7 +6,7 @@
     <class name="model.T_Model" table="T_MODEL">
         <id name="ModelID" type="java.lang.Integer">
             <column name="MODELID" />
-            <generator class="assigned" />
+            <generator class="native" />
         </id>
         <property name="ModelName" type="java.lang.String">
             <column name="MODELNAME" />

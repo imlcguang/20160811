@@ -6,7 +6,7 @@
     <class name="model.T_BorrowRecord" table="T_BORROWRECORD">
         <id name="BorrowNo" type="java.lang.Integer">
             <column name="BORROWNO" />
-            <generator class="assigned" />
+            <generator class="native" />
         </id>
         <many-to-one name="CustomerID" class="model.T_Customer" fetch="join">
             <column name="CUSTOMERID" />

@@ -1,5 +1,7 @@
 package com.ixs.first1.first1;
 
+import java.util.Scanner;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -16,24 +18,24 @@ public class CustomerTest {
 	private SessionFactory sessionFactory;// 声明私有会话工厂对象类
 	private Session session;// 声明私有会话对象类
 	private Transaction transaction;// 声明私有事务对象类
-    private Configuration config;
-    
+	private Configuration config;
+
 	@Before
 	public void init() {
 		// 创建配置对象
-		 config = new Configuration().configure("model/Hibernate.cfg.xml");
+		config = new Configuration().configure("model/Hibernate.cfg.xml");
 		// 创建服务注册对象
 		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(config.getProperties())
 				.build();
 		// 创建会话工程对象
-		 //sessionFactory = config.buildSessionFactory(serviceRegistry);
+		// sessionFactory = config.buildSessionFactory(serviceRegistry);
 		sessionFactory = config.buildSessionFactory();
-		//会话对象
+		// 会话对象
 		session = sessionFactory.openSession();
-		//开启事务
-		transaction=session.beginTransaction();
-		System.out.println("before");
-		
+		// 开启事务
+		transaction = session.beginTransaction();
+		// System.out.println("before");
+
 	}
 
 	@After
@@ -44,17 +46,104 @@ public class CustomerTest {
 		session.close();
 		// 会话工厂关闭
 		sessionFactory.close();
-		System.out.println("after");
+		// System.out.println("after");
 	}
 
 	@Test
+	// 增加
 	public void testSaveCustomers() {
+		T_Customer c = new T_Customer();
+		Scanner scan = new Scanner(System.in);
+		System.out.println("您将进行的是新增操作:");
+		System.out.println("请输入姓名");
+		c.setCustomerName(scan.next());
+		System.out.println("请输入联系人姓名");
+		c.setRelationName(scan.next());
+		System.out.println("请输入联系电话");
+		c.setRelationPhone(scan.next());
+		System.out.println("请输入地址");
+		c.setAddress(scan.next());
+		System.out.println("请输入邮箱");
+		c.setEmail(scan.next());
+		System.out.println("请输入备注");
+		c.setRemark(scan.next());
 
-		T_Customer c=new T_Customer(441, "ruby", "tom", "123456321",
-				"fzu", "ruby@qq.com", "0");
 		session.save(c);
-		System.out.println("test");
-		
+		System.out.println("新增成功！您的ID为：" + c.getCustomerID());
+	}
+
+	@Test
+	// 修改
+	public void testUpdateCustomers() {
+		T_Customer c = new T_Customer();
+		Scanner scan = new Scanner(System.in);
+		System.out.println("您将进行的是修改操作:");
+		System.out.println("请输入修改用户的ID");
+		c = (T_Customer) session.get(T_Customer.class, scan.nextInt());
+
+		System.out.println("您将进行的是修改操作序号:1：CustomerName，2：RelationName，3：RelationPhone" + "4：Address,5:Email,6:Remark");
+		String sr = scan.next();
+		switch (sr) {
+		case "1": {
+			System.out.println("请输入新姓名");
+			c.setCustomerName(scan.next());
+			break;
+		}
+		case "2": {
+			System.out.println("请输入新联系人姓名");
+			c.setRelationName(scan.next());
+			break;
+		}
+		case "3": {
+			System.out.println("请输入新联系电话");
+			c.setRelationPhone(scan.next());
+			break;
+		}
+		case "4": {
+			System.out.println("请输入新地址");
+			c.setAddress(scan.next());
+			break;
+		}
+		case "5": {
+			System.out.println("请输入新邮箱");
+			c.setEmail(scan.next());
+			break;
+		}
+		case "6": {
+			System.out.println("请输入新备注");
+			c.setRemark(scan.next());
+			break;
+		}
+		default:
+			break;
+		}
+		session.update(c);
+		System.out.println("修改成功！");
+	}
+
+	@Test
+	// 删除
+	public void testDeleteCustomers() {
+		T_Customer c = new T_Customer();
+		Scanner scan = new Scanner(System.in);
+
+		System.out.println("您将进行的是删除操作:");
+		System.out.println("请输入删除用户的ID");
+		c = (T_Customer) session.get(T_Customer.class, scan.nextInt());
+		session.delete(c);
+		System.out.println("删除成功！");
+	}
+	@Test
+	// 查询
+	public void testGetCustomers() {
+		T_Customer c = new T_Customer();
+		Scanner scan = new Scanner(System.in);
+
+		System.out.println("您将进行的是查询操作:");
+		System.out.println("请输入查询用户的ID");
+		c = (T_Customer) session.get(T_Customer.class, scan.nextInt());
+		System.out.println(c);
+		System.out.println("查询成功！");
 	}
 
 }

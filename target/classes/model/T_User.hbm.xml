@@ -6,7 +6,7 @@
     <class name="model.T_User" table="T_USER">
         <id name="UserID" type="java.lang.Integer">
             <column name="USERID" />
-            <generator class="assigned" />
+            <generator class="native" />
         </id>
         <property name="LoginName" type="java.lang.String">
             <column name="LOGINNAME" />

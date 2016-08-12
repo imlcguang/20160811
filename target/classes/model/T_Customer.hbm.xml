@@ -6,7 +6,7 @@
     <class name="model.T_Customer" table="T_CUSTOMER">
         <id name="CustomerID" type="java.lang.Integer">
             <column name="CUSTOMERID" />
-            <generator class="assigned" />
+            <generator class="native" />
         </id>
         <property name="CustomerName" type="java.lang.String">
             <column name="CUSTOMERNAME" />
