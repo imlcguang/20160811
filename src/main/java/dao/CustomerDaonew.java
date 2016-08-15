@@ -1,6 +1,5 @@
-package com.ixs.first1.first1;
+package dao;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,14 +10,11 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import org.hibernate.service.ServiceRegistry;
-import org.jboss.jandex.Main;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import model.T_Customer;
 
-public class CustomerTest {
+public class CustomerDaonew {
 	private static SessionFactory sessionFactory;// 声明私有会话工厂对象类
 	private static Session session;// 声明私有会话对象类
 	private static Transaction transaction;// 声明私有事务对象类

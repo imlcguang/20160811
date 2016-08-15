@@ -1,7 +1,5 @@
-package com.ixs.first1.first1;
+package dao;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import org.hibernate.Session;
@@ -9,23 +7,21 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.query.Query;
 import org.hibernate.service.ServiceRegistry;
-import org.jboss.jandex.Main;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import model.T_Customer;
 
-public class CustomerTest {
-	private static SessionFactory sessionFactory;// 声明私有会话工厂对象类
-	private static Session session;// 声明私有会话对象类
-	private static Transaction transaction;// 声明私有事务对象类
-	private static Configuration config;
+public class CustomerDao {
+	private SessionFactory sessionFactory;// 声明私有会话工厂对象类
+	private Session session;// 声明私有会话对象类
+	private Transaction transaction;// 声明私有事务对象类
+	private Configuration config;
 
-	// @Before
-	public static void init() {
+
+	public void init() {
 		// 创建配置对象
 		config = new Configuration().configure("model/Hibernate.cfg.xml");
 		// 创建服务注册对象
@@ -42,7 +38,7 @@ public class CustomerTest {
 
 	}
 
-	// @After
+
 	public void destory() {
 		// 事务提交
 		transaction.commit();
@@ -53,7 +49,7 @@ public class CustomerTest {
 		// System.out.println("after");
 	}
 
-	@Test
+	
 	// 增加
 	public void testSaveCustomers() {
 		init();
@@ -78,7 +74,7 @@ public class CustomerTest {
 		destory();
 	}
 
-	@Test
+	
 	// 修改
 	public void testUpdateCustomers() {
 		init();
@@ -129,7 +125,6 @@ public class CustomerTest {
 		destory();
 	}
 
-	@Test
 	// 删除
 	public void testDeleteCustomers() {
 		init();
@@ -143,13 +138,12 @@ public class CustomerTest {
 		System.out.println("删除成功！");
 		destory();
 	}
-
-	@Test
 	// 查询
-	public void testGetCustomersfromid() {
+	public void testGetCustomers() {
 		init();
 		T_Customer c = new T_Customer();
 		Scanner scan = new Scanner(System.in);
+
 		System.out.println("您将进行的是查询操作:");
 		System.out.println("请输入查询用户的ID");
 		c = (T_Customer) session.get(T_Customer.class, scan.nextInt());
@@ -157,113 +151,4 @@ public class CustomerTest {
 		System.out.println("查询成功！");
 		destory();
 	}
-
-	// 模糊查询按名字
-	public static List<T_Customer> findByCustomerName(String sname) throws Exception {
-
-		// String strSQL = "from T_Customer as s where s.CustomerName like
-		// :name";
-		Query query = session.createQuery("from T_Customer as s where s.CustomerName like :name");
-		query.setString("name", "%" + sname + "%");
-		List result = query.list();
-
-		for (int i = 0; i < result.size(); i++) {
-			T_Customer c = new T_Customer();
-			T_Customer customer = (T_Customer) result.get(i);
-
-			int customerid = customer.getCustomerID();
-			c = (T_Customer) session.get(T_Customer.class, customerid);
-			System.out.println("查询成功！");
-			System.out.println(c);
-
-		}
-		return result;
-	}
-
-	// 模糊查询按联系人
-	public static List<T_Customer> findByRelationName(String rname) throws Exception {
-
-		// String strSQL = "from T_Customer as s where s.CustomerName like
-		// :name";
-		Query query = session.createQuery("from T_Customer as s where s.RelationName like :name");
-		query.setString("name", "%" + rname + "%");
-		List result = query.list();
-
-		for (int i = 0; i < result.size(); i++) {
-			T_Customer c = new T_Customer();
-			T_Customer customer = (T_Customer) result.get(i);
-
-			int customerid = customer.getCustomerID();
-			c = (T_Customer) session.get(T_Customer.class, customerid);
-			System.out.println("查询成功！");
-			System.out.println(c);
-
-		}
-		return result;
-	}
-	// 模糊查询按联系人
-		public static List<T_Customer> findByRelationPhone(String rname) throws Exception {
-
-			// String strSQL = "from T_Customer as s where s.CustomerName like
-			// :name";
-			Query query = session.createQuery("from T_Customer as s where s.RelationPhone like :name");
-			query.setString("name", "%" + rname + "%");
-			List result = query.list();
-
-			for (int i = 0; i < result.size(); i++) {
-				T_Customer c = new T_Customer();
-				T_Customer customer = (T_Customer) result.get(i);
-
-				int customerid = customer.getCustomerID();
-				c = (T_Customer) session.get(T_Customer.class, customerid);
-				System.out.println("查询成功！");
-				System.out.println(c);
-
-			}
-			return result;
-		}
-
-	@Test
-	public void testGetCustomers() throws Exception {
-		init();
-		Scanner scan = new Scanner(System.in);
-		System.out.println("您将进行的是模糊查询操作:");
-		System.out.println("按____查询：（1客户姓名，2联系人，3电话）");
-		switch (scan.next()) {
-		case "1": {
-			System.out.println("输入您要查询的姓名");
-			String sname = "";
-			sname = scan.next();
-			System.out.println();
-			findByCustomerName(sname);
-			destory();
-			break;
-		}
-		case "2": {
-			System.out.println("输入您要查询的联系人");
-			String sname = "";
-			sname = scan.next();
-			System.out.println();
-			findByRelationName(sname);
-			destory();
-			break;
-
-		}
-		case "3": {
-			System.out.println("输入您要查询的电话");
-			String sname = "";
-			sname = scan.next();
-			System.out.println();
-			findByRelationPhone(sname);
-			destory();
-			break;
-			
-		}
-
-		default:
-			break;
-		}
-
-	}
-
 }
