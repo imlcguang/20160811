@@ -3,11 +3,13 @@ package dao;
 import java.util.Date;
 import java.util.Scanner;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Projection;
 import org.hibernate.service.ServiceRegistry;
 import org.junit.After;
 import org.junit.Before;
@@ -87,11 +89,11 @@ public class BorrowRecordDao {
 		System.out.println("请输入借条编号");
 		b.setBorrowCheckNo(scan.nextInt());
 
-		b.setReturnDatetime(new Date());
+		/*b.setReturnDatetime(new Date());
 
 		System.out.println("请输入归还操作员ID");
 		T_User u3 = (T_User) session.get(T_User.class, scan.nextInt());
-		b.setReturnOperator(u3);
+		b.setReturnOperator(u3);*/
 
 		session.save(b);
 		System.out.println("新增成功！您的借机编号为：" + b.getBorrowNo());
@@ -100,6 +102,29 @@ public class BorrowRecordDao {
 		destory();
 
 	}
+	//归还
+	public void testSaveReturnRecord() {
+		init();
+		T_BorrowRecord b = new T_BorrowRecord();
+
+		Scanner scan = new Scanner(System.in);
+		System.out.println("您将进行的是归还操作:");
+		
+		System.out.println("请输入归还物品的借机编号");
+		b = (T_BorrowRecord) session.get(T_BorrowRecord.class, scan.nextInt());
+		
+		//自动生成归还时间
+		b.setReturnDatetime(new Date());
+
+		System.out.println("请输入归还操作员ID");
+		T_User u3 = (T_User) session.get(T_User.class, scan.nextInt());
+		b.setReturnOperator(u3);
+		
+		session.save(b);
+		
+		destory();
+	}
+	
 
 	// 修改
 	public void testUpdateBorrowRecord() {
@@ -202,5 +227,10 @@ public class BorrowRecordDao {
 		System.out.println(b);
 		System.out.println("查询成功！");
 		destory();
+	}
+	
+	//统计还没写啊啊啊啊好混乱
+	public void testCountBorrowRecord() {
+	System.out.println("不好意思，功能未设置");
 	}
 }

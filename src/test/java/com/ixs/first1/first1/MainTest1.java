@@ -2,8 +2,11 @@ package com.ixs.first1.first1;
 
 import java.util.Scanner;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.jboss.jandex.Main;
 
+import dao.BorrowRecordDao;
 import dao.CustomerDao;
 import dao.CustomerDaonew;
 import dao.ModelDao;
@@ -120,10 +123,44 @@ public class MainTest1 {
 
 			break;
 		}
-		
-		//2商务：借机登记，归还，统计，明细查询
+
+		// 2商务：借机登记，归还，统计，明细查询
 		case "2": {
-			System.out.println("请输入需要修改的信息序号：（1客户，2用户，3样机）");
+			System.out.println("请输入操作的内容：（1借机登记，2样机归还，3借机明细查询，4借机统计）");
+			switch (scan.next()) {
+			//1借机登记×
+			case "1": {
+				BorrowRecordDao brd = new BorrowRecordDao();
+				break;
+
+			}
+			//2样机归还√
+			case "2": {
+				BorrowRecordDao brd = new BorrowRecordDao();
+				brd.testSaveReturnRecord();
+				break;
+
+			}
+			//3借机明细查询√
+			case "3": {
+				BorrowRecordDao brd = new BorrowRecordDao();
+				brd.testGetBorrowRecord();
+				break;
+
+			}
+			//4借机统计×
+			case "4": {
+				BorrowRecordDao brd = new BorrowRecordDao();
+				brd.testCountBorrowRecord();
+				break;
+
+			}
+
+			default:
+				break;
+			}
+
+			break;
 		}
 		default:
 			break;
